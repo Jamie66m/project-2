@@ -2,8 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './styles/style.scss'
-
-import axios from 'axios'
+//pages
 import MovieSearch from './MovieSearch'
 
 const App = () => (

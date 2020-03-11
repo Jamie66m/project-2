@@ -15,12 +15,15 @@ class MovieSearch extends React.Component {
   componentDidMount() {
     axios
       .get({
-        url: `https://movie-database-imdb-alternative.p.rapidapi.com/?page&1r=json&s=ant`,
+        url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
         headers: {
           'content-type': 'application/json',
           'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com',
           'x-rapidapi-key':
             '3ab72deec2msh1a38cc127a929b8p18fd0bjsn1a104e907491',
+        },
+        params: {
+          s: 'Avengers Endgame',
         },
       })
       .then(resp => this.setState({ movies: resp }))
