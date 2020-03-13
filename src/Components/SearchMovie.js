@@ -3,7 +3,7 @@ import React from 'react'
 import DisplayMovies from './DisplayMovies'
 const SearchMovie = () => (
   <main className="searchMovieMain">
-    <div>
+    <div className="searchMovieDiv">
       {/* <SearchForm /> */}
       <DisplayMovies />
     </div>

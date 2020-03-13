@@ -2,10 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
 
-import Menu from './Menu'
-
-import axios from 'axios'
-
 class NavBar extends React.Component {
   constructor() {
     super()
@@ -51,13 +47,25 @@ class NavBar extends React.Component {
           >
             <div className="navbar-end">
               <div className="navbar-item">
-                <Menu />
+                <Link to="/LatestMovies">Latest Movie</Link>
               </div>
               <div className="navbar-item">
-                <Link to="/CompareMovie">Compare</Link>
+                <Link to="/NowPlaying">Now Playing</Link>
               </div>
               <div className="navbar-item">
-                <Link to="/SearchMovie">Search</Link>
+                <Link to="/Popular">Popular</Link>
+              </div>
+              <div className="navbar-item">
+                <Link to="/TopRated">Top Rated</Link>
+              </div>
+              <div className="navbar-item">
+                <Link to="/UpComing">Upcoming</Link>
+              </div>
+              <div className="navbar-item">
+                <Link to="/CompareMovie" className="button is-info">Compare</Link>
+              </div>
+              <div className="navbar-item">
+                <Link to="/SearchMovie" className="button is-success">Search</Link>
               </div>
             </div>
           </div>
