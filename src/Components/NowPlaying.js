@@ -12,7 +12,7 @@ class LatestMovies extends React.Component {
 
   componentDidMount() {
     axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=3f28c5c611a8e649594298eef308b64c&language=en-US&page=1')
-      .then(res => this.setState({ movies: res.data }))
+      .then(res => this.setState({ movies: res.data.results }))
       .catch(error => console.error(error))
   }
 

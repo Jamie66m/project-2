@@ -18,18 +18,23 @@ class LatestMovies extends React.Component {
 
   render() {
     if (!this.state.movies) {
-      return <h1>Movie not ready...</h1>
+      return <h1>Movies not ready...</h1>
     }
-    const { title, runtime, popularity, overview } = this.state.movies
     return <section className="section">
       <div className="container">
-        <div className="columns">
-          <div className="column is-one-half">
-            <h1 className="title">Movie Title: {title}</h1>
-            <h2 className="subtitle">Movie RunTime: {runtime}</h2>
-            <h2 className="subtitle">Movie Popularity: {popularity} (if 0 it is because it is has not been critiqued yet)</h2>
-            <p>Movie {overview}</p>
-          </div>
+        <div className="columns is-multiline is-mobile">
+          {this.state.movies.map(movie => {
+            return <div key={movie.results.id} className="column is-one-quarter-desktop is-one-third-table is-one-half-mobile">
+              <div className="card">
+                <div className="card-header">
+                  <h4 className="card-title">{movie.results.title}</h4>
+                </div>
+              </div>
+              <div className="card-content">
+                <p>{movie.results.overview}</p>
+              </div>
+            </div>
+          })}
         </div>
       </div>
     </section>
