@@ -10,40 +10,27 @@ class DisplayMovies extends React.Component {
     super()
     this.state = {
       movies: [],
-      filteredMovies: [],
       query: '',
     }
+
+    this.fetchMovies = this.fetchMovies.bind(this)
   }
 
-  // componentDidMount() {
-  // DOING EXACTLY THE SAME AS ABOVE BUT USING AXIOS
-
-  fetchAxios() {
+  fetchMovies(event) {
+    event.preventDefault()
     axios
       .get(
         `https://api.themoviedb.org/3/search/movie?api_key=77ec028641c2e3e8a7aeefbf47a24816&language=en-US&query=${this.state.query}&page=1`,
       )
-      .then(response => {
-        console.log(response.data)
-        // this.setState({
-        //   movies: response.data.results,
-        //   filteredMovies: response.data.results,
-        // })
+      .then(({ data: { results } }) => {
+        const filteredMovies = results.filter(movie => {
+          const regex = new RegExp(this.state.query, 'i')
+          return movie.title.match(regex)
+        })
+        this.setState({
+          movies: filteredMovies,
+        })
       })
-      .catch(error => console.error(error))
-  }
-
-  filterMovies(event) {
-    const searchQuery = event.target.value
-    const filteredMovies = this.state.movies.filter(movie => {
-      const regex = new RegExp(searchQuery, 'i')
-      return movie.title.match(regex)
-    })
-    this.setState({
-      query: searchQuery,
-      filteredMovies,
-    })
-    console.log(this.state.query)
   }
 
   render() {
@@ -52,13 +39,13 @@ class DisplayMovies extends React.Component {
         <section className="MoviesIndex">
           <SearchForm
             query={this.state.query}
-            onChange={() => this.filterMovies(event)}
-            onSubmit={() => this.fetchAxios()}
+            onChange={event => this.setState({ query: event.target.value })}
+            handleSearch={this.fetchMovies}
           />
           <div className="section">
             <div className="container">
               <div className="columns is-multiline is-mobile">
-                {this.state.filteredMovies.map((movie, index) => {
+                {this.state.movies.map((movie, index) => {
                   return <MovieCard key={index} {...movie} />
                 })}
               </div>

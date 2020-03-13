@@ -1,11 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-const SearchForm = ({ query, onChange }) => {
+const SearchForm = ({ query, onChange, handleSearch }) => {
   return (
     <div className="SearchForm ">
       <div className="container is-centered">
-        <div className="field has-addons">
+        <form className="field has-addons">
           <div className="control is-expanded">
             <input
               className="input is-normal"
@@ -16,11 +15,16 @@ const SearchForm = ({ query, onChange }) => {
             />
           </div>
           <div className="control">
-            <Link to="/" className="button is-info is-normal" id="searchbutton">
+            <button
+              type="submit"
+              className="button is-info is-normal"
+              id="searchbutton"
+              onClick={handleSearch}
+            >
               Search
-            </Link>
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   )
