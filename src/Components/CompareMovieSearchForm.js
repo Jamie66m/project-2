@@ -1,26 +1,32 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-const SearchForm2 = () => {
+
+const SearchForm2 = ({ query, onChange, handleSearch }) => {
   return (
-    <div className="SearchForm2">
-      <div className="container">
-        <div className="field has-addons">
+    <div className="SearchForm2 ">
+      <div className="container is-centered">
+        <form className="field has-addons">
           <div className="control is-expanded">
             <input
               className="input is-normal"
               type="search"
               placeholder="search movie..."
+              value={query}
+              onChange={onChange}
             />
           </div>
           <div className="control">
-            <Link to="/" className="button is-info is-normal" id="searchbutton">
+            <button
+              type="submit"
+              className="button is-info is-normal"
+              id="searchbutton"
+              onClick={handleSearch}
+            >
               Search
-            </Link>
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   )
 }
-
 export default SearchForm2

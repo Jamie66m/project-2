@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-const Modal = ({ children, closeModal, modalState, title }) => {
+const Modal = ({ children, closeModal, modalState, singleMovie }) => {
   if (!modalState) {
     return null
   }
@@ -9,11 +9,31 @@ const Modal = ({ children, closeModal, modalState, title }) => {
       <div className="modal-background" onClick={closeModal} />
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">{title}</p>
+          <p className="modal-card-title">{singleMovie.title}</p>
           <button className="delete" onClick={closeModal} />
         </header>
         <section className="modal-card-body">
           <div className="content">{children}</div>
+          <figure className="image" id="modalImage">
+            <img
+              src={`https://image.tmdb.org/t/p/w185/${singleMovie.poster_path}`}
+              alt={singleMovie.title}
+            />
+          </figure>
+          <div id="modalOverviewDiv">
+            <p id="modalOverview">{singleMovie.overview}</p>
+          </div>
+          <div>
+            <h4 className="modalRating">Ratings</h4>
+            <p className="modalStats">Popularity: {singleMovie.popularity}</p>
+            <p className="modalStats">Vote Count: {singleMovie.vote_count}</p>
+            <p className="modalStats">
+              Vote Average: {singleMovie.vote_average}
+            </p>
+            <p className="modalStats">
+              Original Language: {singleMovie.original_language}
+            </p>
+          </div>
         </section>
         <footer className="modal-card-foot"></footer>
       </div>
@@ -30,6 +50,7 @@ class ShowModal extends React.Component {
     super(props)
     this.state = {
       modalState: false,
+      singleMovie: {},
     }
     this.toggleModal = this.toggleModal.bind(this)
   }
@@ -38,8 +59,11 @@ class ShowModal extends React.Component {
       const newState = !prev.modalState
       return { modalState: newState }
     })
+    this.setState({ singleMovie: this.props })
   }
+
   render() {
+    console.log(this.props)
     return (
       <span>
         <a data-name="Aarhus" data-slug="aarhus" onClick={this.toggleModal}>
@@ -53,7 +77,7 @@ class ShowModal extends React.Component {
         <Modal
           closeModal={this.toggleModal}
           modalState={this.state.modalState}
-          title=""
+          singleMovie={this.state.singleMovie}
         ></Modal>
       </span>
     )

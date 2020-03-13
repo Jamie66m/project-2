@@ -1,15 +1,15 @@
 import React from 'react'
 import axios from 'axios'
 // import ShowModal from './MovieModal'
-import SearchForm from './SearchForm'
-import MovieCard from './MovieCard'
+import SearchForm2 from './CompareMovieSearchForm'
+import CompareMovieCard from './CompareMovieCard'
 // import {Link} from 'react-router-dom'
 
-class DisplayMovies extends React.Component {
+class DisplayCompareMovies extends React.Component {
   constructor() {
     super()
     this.state = {
-      movies: [],
+      movies: null,
       query: '',
     }
 
@@ -36,20 +36,24 @@ class DisplayMovies extends React.Component {
   render() {
     return (
       <>
+        {console.log(this.state.movies)}
         <section className="MoviesIndex">
-          {/* { to center later } */}
-          <SearchForm
+          <SearchForm2
             query={this.state.query}
             onChange={event => this.setState({ query: event.target.value })}
             handleSearch={this.fetchMovies}
           />
-
           <div className="section">
             <div className="container">
               <div className="columns is-multiline is-mobile">
-                {this.state.movies.map((movie, index) => {
-                  return <MovieCard key={index} {...movie} />
-                })}
+                {this.state.movies ? (
+                  <CompareMovieCard {...this.state.movies[0]} />
+                ) : (
+                  <p> </p>
+                )}
+                {/* {this.state.movies.map((movie, index) => {
+                  return <CompareMovieCard key={index} {...movie} />
+                })} */}
               </div>
             </div>
           </div>
@@ -59,4 +63,4 @@ class DisplayMovies extends React.Component {
   }
 }
 
-export default DisplayMovies
+export default DisplayCompareMovies

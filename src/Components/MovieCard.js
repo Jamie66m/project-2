@@ -1,6 +1,16 @@
 import React from 'react'
+import ShowModal from './MovieModal'
 
-const MovieCard = ({ title, release_date, poster_path }) => {
+const MovieCard = ({
+  title,
+  release_date,
+  poster_path,
+  overview,
+  popularity,
+  vote_count,
+  vote_average,
+  original_language,
+}) => {
   return (
     <div className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
       <div className="card">
@@ -15,7 +25,21 @@ const MovieCard = ({ title, release_date, poster_path }) => {
             />
           </figure>
           <div className="card-content">
-            <h5 className="title">{release_date}</h5>
+            <h5 className="subtitle">
+              {release_date}
+              <div id="showModalButton">
+                <ShowModal
+                  title={title}
+                  release_date={release_date}
+                  poster_path={poster_path}
+                  overview={overview}
+                  popularity={popularity}
+                  vote_count={vote_count}
+                  vote_average={vote_average}
+                  original_language={original_language}
+                />
+              </div>
+            </h5>
           </div>
         </div>
       </div>

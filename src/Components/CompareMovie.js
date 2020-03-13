@@ -1,12 +1,13 @@
 import React from 'react'
-import SearchForm2 from './CompareMovieSearchForm'
+// import SearchForm2 from './CompareMovieSearchForm'
+import DisplayCompareMovies from './DisplayCompareMovies'
 const CompareMovie = () => (
   <main className="compareMovieMain">
     <div className="compareMovieDiv">
-      <SearchForm2 />
+      <DisplayCompareMovies />
     </div>
     <div className="compareMovieDiv">
-      <SearchForm2 />
+      <DisplayCompareMovies />
     </div>
   </main>
 )

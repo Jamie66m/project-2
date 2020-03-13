@@ -1,8 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 // import {Link} from 'react-router-dom'
-
-// import slick from 'slick-carousel'
+import Slider from 'react-slick'
 
 class SlickCarousel extends React.Component {
   constructor() {
@@ -53,69 +52,58 @@ class SlickCarousel extends React.Component {
     const poster8 = this.state.slickPoster8
     const poster9 = this.state.slickPoster9
     const poster10 = this.state.slickPoster10
+    const settings = {
+      dots: true,
+      infinite: true,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      autoplay: true,
+      speed: 2000,
+      autoplaySpeed: 2000,
+      cssEase: 'linear',
+    }
     return (
       <section>
-        <h1>hey</h1>
-        <figure>
-          <img
-            src={`https://image.tmdb.org/t/p/w185/${poster1}`}
-            alt="A piece of art"
-          />
-        </figure>
-        <figure>
-          <img
-            src={`https://image.tmdb.org/t/p/w185/${poster2}`}
-            alt="A piece of art"
-          />
-        </figure>
-        <figure>
-          <img
-            src={`https://image.tmdb.org/t/p/w185/${poster3}`}
-            alt="A piece of art"
-          />
-        </figure>
-        <figure>
-          <img
-            src={`https://image.tmdb.org/t/p/w185/${poster4}`}
-            alt="A piece of art"
-          />
-        </figure>
-        <figure>
-          <img
-            src={`https://image.tmdb.org/t/p/w185/${poster5}`}
-            alt="A piece of art"
-          />
-        </figure>
-        <figure>
-          <img
-            src={`https://image.tmdb.org/t/p/w185/${poster6}`}
-            alt="A piece of art"
-          />
-        </figure>
-        <figure>
-          <img
-            src={`https://image.tmdb.org/t/p/w185/${poster7}`}
-            alt="A piece of art"
-          />
-        </figure>
-        <figure>
-          <img
-            src={`https://image.tmdb.org/t/p/w185/${poster8}`}
-            alt="A piece of art"
-          />
-        </figure>
-        <figure>
-          <img
-            src={`https://image.tmdb.org/t/p/w185/${poster9}`}
-            alt="A piece of art"
-          />
-        </figure>
-        <figure>
-          <img
-            src={`https://image.tmdb.org/t/p/w185/${poster10}`}
-            alt="A piece of art"
-          />
-        </figure>
+        <div>
+          <Slider {...settings}>
+            <div>
+              <img
+                src={`https://image.tmdb.org/t/p/w342/${poster1}`}
+                alt="A piece of art"
+              />
+            </div>
+            <div>
+              <img
+                src={`https://image.tmdb.org/t/p/w342/${poster2}`}
+                alt="A piece of art"
+              />
+            </div>
+            <div>
+              <img
+                src={`https://image.tmdb.org/t/p/w342/${poster3}`}
+                alt="A piece of art"
+              />
+            </div>
+            <div>
+              <img
+                src={`https://image.tmdb.org/t/p/w342/${poster4}`}
+                alt="A piece of art"
+              />
+            </div>
+            <div>
+              <img
+                src={`https://image.tmdb.org/t/p/w342/${poster5}`}
+                alt="A piece of art"
+              />
+            </div>
+            <div>
+              <img
+                src={`https://image.tmdb.org/t/p/w342/${poster6}`}
+                alt="A piece of art"
+              />
+            </div>
+          </Slider>
+        </div>
       </section>
     )
   }
