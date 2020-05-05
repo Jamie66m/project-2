@@ -113,10 +113,6 @@ class NavBar extends React.Component {
 ```
 
 ```js 
-render() {
-    return (
-      <nav className="navbar is-warning">
-        <div className="container">
           <div className="navbar-brand">
             <Link className="navbar-item" to="/" id="logo">
               JJDb
@@ -138,40 +134,7 @@ render() {
               <span aria-hidden="true"></span>
             </a>
           </div>
-          <div
-            className={`navbar-menu ${
-              this.state.navMobileOpen ? 'is-active' : ''
-            }`}
-          >
-            <div className="navbar-end">
-              <div className="navbar-item">
-                <Link to="/LatestMovies">Latest Movie</Link>
-              </div>
-              <div className="navbar-item">
-                <Link to="/NowPlaying">Now Playing</Link>
-              </div>
-              <div className="navbar-item">
-                <Link to="/Popular">Popular</Link>
-              </div>
-              <div className="navbar-item">
-                <Link to="/TopRated">Top Rated</Link>
-              </div>
-              <div className="navbar-item">
-                <Link to="/UpComing">Upcoming</Link>
-              </div>
-              <div className="navbar-item">
-                <Link to="/CompareMovie" className="button is-info">Compare</Link>
-              </div>
-              <div className="navbar-item">
-                <Link to="/SearchMovie" className="button is-success">Search</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    )
-  }
-
+         
 ```
 <img src=images/navbarburger2.jpg width=500> <img  src=images/navbarburger3.jpg width=500> 
 
