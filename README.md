@@ -95,7 +95,7 @@ export default withRouter(NavBar)
 
 Bulma gives you some nice features with the Navbar that definitely improve the UI. We wanted to incorporate their navbar-burger class for when a user reduced the width of the page. 
 
-We used the lifecycle `componentDidUpdate()` for the NavBar as we wanted to make sure that when we redirected to a new page the navbar would no longer be active when the state of the navbar was in burger form.
+We used the lifecycle `componentDidUpdate()` for the `{NavBar}` component as we wanted to make sure that when we redirected to a new page the navbar would no longer be active when the state of the navbar was in burger form.
 
 ```js
 class NavBar extends React.Component {
@@ -142,7 +142,7 @@ class NavBar extends React.Component {
 
 The Carousel on the homepage was created by installing the libraries <strong>'react-slick'</strong> and <strong>'slick-carousel'</strong> as well as adding two css stylesheets <strong>'slick'</strong> and <strong>'slick-theme'</strong> to the index.html. The `{SlickCarousel}` component is a separate smart component that was imported in the `{Home}` component which is called by `<BrowserRouter>`.
 
-The SlicCarousel is a class component 
+The `{SlickCarousel}` component with initially sets the state as an object with 6 key: value pairs, with the value being an empty string.
 
 ```js
 class SlickCarousel extends React.Component {
@@ -159,6 +159,9 @@ class SlickCarousel extends React.Component {
   }
 
 ```
+
+We wanted to display the top 6 most popular movies on [The Movie Database API](https://www.themoviedb.org/) and therefore with our GET request to the API, the URL is directed to the popular movies. In our response from the GET request we updated each key with the necessary data.
+
 ```js
   componentDidMount() {
     axios
@@ -175,6 +178,27 @@ class SlickCarousel extends React.Component {
       })
       .catch(err => console.error(err))
   }
+```
+
+For the Slick Carousel to actually run we needed to import Slider from 'react-slick' and use it in the `render()` function as a component. However, before this we needed to specify the settings of the carousel and because we didn't want a static homepage we set the `autoplay` value to true. We wanted the posters to be big on the Homepage and therefore set the `slidesToShow` to have a value of 3.
+
+```js
+ const settings = {
+   dots: true,
+   infinite: true,
+   slidesToShow: 3,
+   slidesToScroll: 1,
+   autoplay: true,
+   speed: 2000,
+   autoplaySpeed: 2000,
+   cssEase: 'linear',
+ }
+```
+
+Furthermore we had to use the ES6 feature, <strong>The Spread Operator</strong> to pass the settings props to the `{Slider}` component. 
+
+```js
+<Slider {...settings}>
 ```
 
 
