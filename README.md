@@ -136,7 +136,7 @@ class NavBar extends React.Component {
           </div>
          
 ```
-<img src=images/navbarburger2.jpg width=400 height=400> <img  src=images/navbarburger3.jpg width=400 height=400> 
+<img src=images/navbarburger2.jpg width=450 height=350> <img  src=images/navbarburger3.jpg width=450 height=350> 
 
 <strong>The Carousel</strong>
 
