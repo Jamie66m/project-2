@@ -173,7 +173,7 @@ render() {
   }
 
 ```
-<img src=images/navbarburger2.jpg width=500> <img  src=images/navbarburger3.jpg height=250> 
+<img src=images/navbarburger2.jpg width=500> <img  src=images/navbarburger3.jpg width=500> 
 
 <strong>The Carousel</strong>
 
