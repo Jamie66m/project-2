@@ -113,28 +113,28 @@ class NavBar extends React.Component {
 ```
 
 ```js 
-          <div className="navbar-brand">
-            <Link className="navbar-item" to="/" id="logo">
-              JJDb
-            </Link>
-            <a
-              role="button"
-              className={`navbar-burger burger ${
-                this.state.navMobileOpen ? 'is-active' : ''
-              }`}
-              aria-label="menu"
-              aria-expanded="false"
-              data-target="navbarBasicExample"
-              onClick={() =>
-                this.setState({ navMobileOpen: !this.state.navMobileOpen })
-              }
-            >
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-              <span aria-hidden="true"></span>
-            </a>
-          </div>
-         
+ <div className="navbar-brand">
+   <Link className="navbar-item" to="/" id="logo">
+     JJDb
+   </Link>
+   <a
+     role="button"
+     className={`navbar-burger burger ${
+       this.state.navMobileOpen ? 'is-active' : ''
+     }`}
+     aria-label="menu"
+     aria-expanded="false"
+     data-target="navbarBasicExample"
+     onClick={() =>
+       this.setState({ navMobileOpen: !this.state.navMobileOpen })
+     }
+   >
+     <span aria-hidden="true"></span>
+     <span aria-hidden="true"></span>
+     <span aria-hidden="true"></span>
+   </a>
+ </div>
+ 
 ```
 <img src=images/navbarburger2.jpg width=450 height=350> <img  src=images/navbarburger3.jpg width=450 height=350> 
 
