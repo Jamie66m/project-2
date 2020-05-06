@@ -142,7 +142,7 @@ class NavBar extends React.Component {
 
 The Carousel on the homepage was created by installing the libraries <strong>'react-slick'</strong> and <strong>'slick-carousel'</strong> as well as adding two css stylesheets <strong>'slick'</strong> and <strong>'slick-theme'</strong> to the index.html. The `{SlickCarousel}` component is a separate smart component that was imported in the `{Home}` component which is called by `<BrowserRouter>`.
 
-The `{SlickCarousel}` component with initially sets the state as an object with 6 key: value pairs, with the value being an empty string.
+The `{SlickCarousel}` component initially sets the state as an object with 6 key: value pairs, with the value being an empty string.
 
 ```js
 class SlickCarousel extends React.Component {
@@ -202,3 +202,183 @@ Furthermore we had to use the ES6 feature, <strong>The Spread Operator</strong> 
 ```
 
 
+### The Movies
+
+<strong>Searching for a Movie</strong>
+
+Searching for a movie brought it's challenges due to the API we were using as it had trouble responding to a GET request when we passed in `{this.state.query}` into the query string. However, the reason for this was because of our limited knowledge of the `new RegExp()` object. Once we recognised this was our solution we then could use the `match()` method, which is used to search a string for a match against any regular expression. We set the movies value in the state as an empty array so that when we filtered the movies from the GET request after the search had been submitted, then these would pass into the movies array. Furthermore, we used `axios` instead of `fetch` as we were more comfortable with the syntax. 
+
+```js
+class DisplayMovies extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      movies: [],
+      query: '',
+    }
+
+    this.fetchMovies = this.fetchMovies.bind(this)
+  }
+
+  fetchMovies(event) {
+    event.preventDefault()
+    axios
+      .get(
+        `https://api.themoviedb.org/3/search/movie?api_key=77ec028641c2e3e8a7aeefbf47a24816&language=en-US&query=${this.state.query}&page=1`,
+      )
+      .then(({ data: { results } }) => {
+        const filteredMovies = results.filter(movie => {
+          const regex = new RegExp(this.state.query, 'i')
+          return movie.title.match(regex)
+        })
+        this.setState({
+          movies: filteredMovies,
+        })
+      })
+  }
+```
+
+To write cleaner code we then had two separate components; one to search for the movies called `{SearchForm}` and the other was to create the movie card - `{MovieCard}`. This was our first use of props in the project and it was great that we both felt relatively comfortable passing props from one component to the other.
+
+We would pass the `onChange` prop from the `{DisplayMovies}` component to the `{SearchForm}` component. The onChange prop was setting the state of the query to the value that was being inputed into the the search form. 
+
+```js
+ <SearchForm
+   query={this.state.query}
+   onChange={event => this.setState({ query: event.target.value })}
+   handleSearch={this.fetchMovies}
+ />
+```
+
+The `{SearchForm component}` is just a functional component where we passed the query state as the value into the input, the onChange prop as the value of the onChange handler and lastly when we submitted the form using `onClick` this would then run our GET request to the API. 
+
+On a couple of other notes we used destructering to improve our code and secondly we checked that our API we would respond to a change in the query string by running a couple of calls in Insomnia.
+
+```js 
+const SearchForm = ({ query, onChange, handleSearch }) => {
+  return (
+    <div className="SearchForm ">
+      <div className="container is-centered">
+        <form className="field has-addons">
+          <div className="control is-expanded">
+            <input
+              className="input is-normal"
+              type="search"
+              placeholder="search movie..."
+              value={query}
+              onChange={onChange}
+            />
+          </div>
+          <div className="control">
+            <button
+              type="submit"
+              className="button is-info is-normal"
+              id="searchbutton"
+              onClick={handleSearch}
+            >
+              Search
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )
+}
+```
+
+The `{MovieCard}` component is another functional component. To display the movies we map through the movies array in the `{DisplayMovies}` component and return the `{MovieCard}` component. As you can see below we again used the Spread Operator to pass through the data to the MovieCard Component.
+
+```js
+ <div className="columns is-multiline is-mobile">
+    {this.state.movies.map((movie, index) => {
+      return <MovieCard key={index} {...movie} />
+    })}
+  </div>
+```
+
+  
+<strong>The Movie Modal</strong>
+
+One of the more complex aspects of this app was using a Modal to display the movie information. Google was definitely our best friend here but there were still aspects that were challenging. 
+
+The Movie Modal was created by passing props from the `{MovieCard}` component to the to the `{ShowModal}` component. When the modal was toggled open we would set the state, with the props passed through to the component, into the `singleMove: {}`. The props that had just been set in the state were then passed through to a functional component called `{Modal}` which was used to display the content in the modal. 
+
+```js
+class ShowModal extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      modalState: false,
+      singleMovie: {},
+    }
+    this.toggleModal = this.toggleModal.bind(this)
+  }
+  toggleModal() {
+    this.setState(prev => {
+      const newState = !prev.modalState
+      return { modalState: newState }
+    })
+    this.setState({ singleMovie: this.props })
+  }
+```
+
+```js
+  <Modal
+    closeModal={this.toggleModal}
+    modalState={this.state.modalState}
+    singleMovie={this.state.singleMovie}
+  >
+  </Modal>
+```
+
+```js
+const Modal = ({ children, closeModal, modalState, singleMovie }) => {
+  if (!modalState) {
+    return null
+  }
+```
+
+```js
+<header className="modal-card-head">
+  <p className="modal-card-title">{singleMovie.title}</p>
+  <button className="delete" onClick={closeModal} />
+</header>
+```
+
+The design of the modal was created using Bulma. The information within modal is what we felt is the most concise and necessary information the user needs to know about that particular movie.
+
+<strong>Comparing Movies</strong>
+
+- We used very similar functionality for comparing movies but we only wanted to bring back the first index from the array.
+
+```js
+{this.state.movies ? (
+    <CompareMovieCard {...this.state.movies[0]} />
+  ) : (
+    <p> </p>
+)}
+```
+
+
+## Winners and Challenges
+
+### Winners
+- I thoroughly enjoyed working as a pair and being able to combine Joao's and my skills together to produce this application is extremely rewarding.
+- Displaying movie information through the use of Modals was an exciting feature to add. Furthermore, using an information icon from Font Awesome was a nice touch.
+- Getting the slick carousel on the Homepage.
+- Getting to grips with passing props between Components in such a short time-frame was very pleasing.
+
+### Challenges
+- Implementing a Modal for the first time was tricky due to passing props from the `{MovieCard}` component to the `{ShowModal}` component. Also the use of proptypes was challenging.
+- Originally we were using another API but it was very limited and we had issues with the search function. Therefore, we changed to The Movie Database API which was a lot less restrictive and provided many more endpoints to fetch data from.
+- Making the search bar static on the page has been a blocker. 
+
+## Future Features
+- Add trailers for each movie
+- Clean up the design
+- Add a Menu instead of having all the links on the Navbar
+
+## Lessons Learned
+- First experience of Pair Programming
+- How to successfully update the state with setState and also update the lifecycle of the component using `componentDidUpdate()`
+- Pass props between React Components.

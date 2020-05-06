@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react'
 import ShowModal from './MovieModal'
 
@@ -9,7 +10,7 @@ const MovieCard = ({
   popularity,
   vote_count,
   vote_average,
-  original_language,
+  original_language
 }) => {
   return (
     <div className="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
